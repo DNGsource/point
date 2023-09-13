@@ -973,10 +973,13 @@ async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id:
         dialogs = await sython1.get_dialogs()
+        await event.respond(f"**جارى مغادرة القنوات و المجموعات**")
+        channel_count = 0
         for dialog in dialogs:
             if dialog.is_channel:
                 await sython1(LeaveChannelRequest(dialog.entity))
-                await event.respond(f"**قمت بمغادرة جميع القنوات والمجموعات**")
+                channel_count += 1
+                await event.edit(f"**تم مغادرة {channel_count} قناة/مجموعة.**")
                 
 
 
