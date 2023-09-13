@@ -979,7 +979,8 @@ async def OwnerStart(event):
             if dialog.is_channel:
                 await sython1(LeaveChannelRequest(dialog.entity))
                 channel_count += 1
-                await event.edit(f"**تم مغادرة {channel_count} قناة/مجموعة.**")
+        await event.respond(f"**تم مغادرة {channel_count} قناة/مجموعة.**")
+
                 
 
 
