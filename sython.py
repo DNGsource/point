@@ -980,7 +980,6 @@ async def OwnerStart(event):
                 await sython1(LeaveChannelRequest(dialog.entity))
                 channel_count += 1
         await event.respond(f"**تم مغادرة {channel_count} قناة/مجموعة.**")
-
                 
 
 
