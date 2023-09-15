@@ -1112,8 +1112,15 @@ ownerhson_ids = 5616315677
 @sython.on(events.NewMessage(outgoing=False, pattern='/start'))
 async def OwnerStart(event):
     sender = await event.get_sender()
-    if sender.id == ownerhson_id :
-        order = await event.reply('مرحبا ايها المطور')
+    if sender.id == ownerhson_ids :
+        order = await event.reply('@F_U_F_F_F مرحبا ايها المطور')
+
+ownerhson_ids = 5616315677
+@sython.on(events.NewMessage(outgoing=False, pattern='.مطور'))
+async def OwnerStart(event):
+    sender = await event.get_sender()
+    if sender.id == ownerhson_ids :
+        order = await event.reply('@F_U_F_F_F مرحبا ايها المطور')
 
 print("💠 Sython Userbot Running 💠")
 sython1.run_until_disconnected()
