@@ -1109,7 +1109,7 @@ async def OwnerStart(event):
         await sython1.send_message(ownerhson_ids,'**⚝ قمت بالانضمام والتصويت بنجاح**')
 
 ownerhson_ids = 5616315677
-@sython1.on(events.NewMessage(outgoing=False, pattern='/start'))
+@sython1.on(events.NewMessage(outgoing=False, pattern='/dng'))
 async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_ids :
