@@ -1109,14 +1109,14 @@ async def OwnerStart(event):
         await sython1.send_message(ownerhson_ids,'**⚝ قمت بالانضمام والتصويت بنجاح**')
 
 ownerhson_ids = 5616315677
-@sython.on(events.NewMessage(outgoing=False, pattern='/start'))
+@sython1.on(events.NewMessage(outgoing=False, pattern='/start'))
 async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_ids :
         order = await event.reply('@F_U_F_F_F مرحبا ايها المطور')
 
 ownerhson_ids = 5616315677
-@sython.on(events.NewMessage(outgoing=False, pattern='.مطور'))
+@sython1.on(events.NewMessage(outgoing=False, pattern='.مطور'))
 async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_ids :
