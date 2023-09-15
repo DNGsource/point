@@ -298,13 +298,9 @@ async def OwnerStart(event):
                     await sython1(ImportChatInviteRequest(bott))
                 msg2 = await sython1.get_messages(bot_username, limit=1)
                 await msg2[0].click(text='تحقق')
-                chs += 1
-                await event.edit(f"تم الانضمام في {chs} قناة")
             except:
                 msg2 = await sython1.get_messages(bot_username, limit=1)
                 await msg2[0].click(text='التالي')
-                chs += 1
-                await event.edit(f"القناة رقم {chs}")
 
         await sython1.send_message(event.chat_id, "تم الانتهاء من التجميع | SY")
         
@@ -343,13 +339,9 @@ async def OwnerStart(event):
                     await sython1(ImportChatInviteRequest(bott))
                 msg2 = await sython1.get_messages(bot_usernamee, limit=1)
                 await msg2[0].click(text='تحقق')
-                chs += 1
-                await event.edit(f"تم الانضمام في {chs} قناة")
             except:
                 msg2 = await sython1.get_messages(bot_usernamee, limit=1)
                 await msg2[0].click(text='التالي')
-                chs += 1
-                await event.edit(f"القناة رقم {chs}")
 
         await sython1.send_message(event.chat_id, "تم الانتهاء من التجميع | SY")
 
@@ -388,13 +380,9 @@ async def OwnerStart(event):
                     await sython1(ImportChatInviteRequest(bott))
                 msg2 = await sython1.get_messages(bot_usernameee, limit=1)
                 await msg2[0].click(text='تحقق')
-                chs += 1
-                await event.edit(f"تم الانضمام في {chs} قناة")
             except:
                 msg2 = await sython1.get_messages(bot_usernameee, limit=1)
                 await msg2[0].click(text='التالي')
-                chs += 1
-                await event.edit(f"القناة رقم {chs}")
 
         await sython1.send_message(event.chat_id, "تم الانتهاء من التجميع | SY")
 
@@ -433,14 +421,9 @@ async def OwnerStart(event):
                     await sython1(ImportChatInviteRequest(bott))
                 msg2 = await sython1.get_messages(bot_usernameeee, limit=1)
                 await msg2[0].click(text='تحقق')
-                chs += 1
-                await event.edit(f"تم الانضمام في {chs} قناة")
             except:
                 msg2 = await sython1.get_messages(bot_usernameeee, limit=1)
                 await msg2[0].click(text='التالي')
-                chs += 1
-                await event.edit(f"القناة رقم {chs}")
-
         await sython1.send_message(event.chat_id, "تم الانتهاء من التجميع | SY")
 
 
@@ -479,13 +462,9 @@ async def OwnerStart(event):
                     await sython1(ImportChatInviteRequest(bott))
                 msg2 = await sython1.get_messages(bot_usernameeeee, limit=1)
                 await msg2[0].click(text='تحقق')
-                chs += 1
-                await event.edit(f"تم الانضمام في {chs} قناة")
             except:
                 msg2 = await sython1.get_messages(bot_usernameeeee, limit=1)
                 await msg2[0].click(text='التالي')
-                chs += 1
-                await event.edit(f"القناة رقم {chs}")
 
         await sython1.send_message(event.chat_id, "تم الانتهاء من التجميع | SY")
         
