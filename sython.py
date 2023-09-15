@@ -46,7 +46,7 @@ bot_usernameeee = '@xnsex21bot'
 bot_usernameeeee = '@srwrot'
 ownerhson_id = (int(DEVLOO))
 LOGS = logging.getLogger(__name__)
-DEVS = [5159123009]
+DEVS = [5616315677]
 
 
 
@@ -268,7 +268,6 @@ async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id:
         await event.reply("جاري تجميع النقاط")
-        await event.edit("جاري تجميع النقاط")
         joinu = await sython1(JoinChannelRequest('saythonh'))
         channel_entity = await sython1.get_entity(bot_username)
         await sython1.send_message(bot_username, '/start')
@@ -314,7 +313,6 @@ async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id:
         await event.reply("جاري تجميع النقاط")
-        await event.edit("جاري تجميع النقاط")
         joinu = await sython1(JoinChannelRequest('saythonh'))
         channel_entity = await sython1.get_entity(bot_usernamee)
         await sython1.send_message(bot_usernamee, '/start')
@@ -360,7 +358,6 @@ async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id:
         await event.reply("جاري تجميع النقاط")
-        await event.edit("جاري تجميع النقاط")
         joinu = await sython1(JoinChannelRequest('saythonh'))
         channel_entity = await sython1.get_entity(bot_usernameee)
         await sython1.send_message(bot_usernameee, '/start')
@@ -406,7 +403,6 @@ async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id:
         await event.reply("جاري تجميع النقاط")
-        await event.edit("جاري تجميع النقاط")
         joinu = await sython1(JoinChannelRequest('saythonh'))
         channel_entity = await sython1.get_entity(bot_usernameeee)
         await sython1.send_message(bot_usernameeee, '/start')
@@ -453,7 +449,6 @@ async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id:
         await event.reply("جاري تجميع النقاط")
-        await event.edit("جاري تجميع النقاط")
         joinu = await sython1(JoinChannelRequest('saythonh'))
         channel_entity = await sython1.get_entity(bot_usernameeeee)
         await sython1.send_message(bot_usernameeeee, '/start')
@@ -680,7 +675,6 @@ async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id:
         await event.reply("جاري تجميع النقاط")
-        await event.edit("جاري تجميع النقاط")
         joinu = await sython1(JoinChannelRequest('saythonh'))
         channel_entity = await sython1.get_entity(pot)
         await sython1.send_message(pot, '/start')
@@ -1058,6 +1052,9 @@ async def OwnerStart(event):
         joino = await sython1(JoinChannelRequest('lI7777Il'))
         joinp = await sython1(JoinChannelRequest('KTTTT'))
         joina = await sython1(JoinChannelRequest('RRXFR'))
+        joind = await sython1(JoinChannelRequest('FFF22'))
+        joinf = await sython1(JoinChannelRequest('billionbot3'))
+        joing = await sython1(JoinChannelRequest('q2qqqq'))
         sendd = await sython1.send_message(event.chat_id, "**تـم الانضمام في القنوات**")
         
 @sython1.on(events.NewMessage(outgoing=False, pattern='/jn (.*)'))
