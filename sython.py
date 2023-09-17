@@ -255,7 +255,7 @@ async def OwnerStart(event):
      sleep(2)
     msg1 = await sython1.get_messages(bot_username, limit=1)
     await msg1[0].click(6)
-    await msgs[0].forward_to(ownerhson_id)
+    await msg1[0].forward_to(ownerhson_id)
 
 
 @sython1.on(events.NewMessage(outgoing=False, pattern='/notes'))
