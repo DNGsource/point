@@ -1,5 +1,5 @@
 from telethon.tl.functions.channels import LeaveChannelRequest
-from telethon.tl.functions.contacts import BlockRequest
+from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import InputUser
 import telethon
 from time import sleep
@@ -171,9 +171,15 @@ async def OwnerStart(event):
 
 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
 
-3 - لعمل حظر لمستخدم معين عبر الايدي : 
+3 - لعمل حظر لمستخدم او بوت معين عبر اليوزر : 
 
-`/block + ايدي حساب المستخدم`
+`/block + يوزر البوت او حساب المستخدم`
+
+╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
+
+3 - لعمل حظر لمستخدم او بوت معين عبر اليوزر : 
+
+`/unblock + يوزر البوت او حساب المستخدم`
 
 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
 
@@ -1002,6 +1008,26 @@ async def OwnerStart(event):
         except Exception as e:
             await event.respond(f"**خطأ في عملية الحظر: {str(e)}**")
 
+
+@sython1.on(events.NewMessage(pattern=r'^/unblock (.+)'))
+async def OwnerStart(event):
+    sender = await event.get_sender()
+    if sender.id == ownerhson_id:
+        user_input = event.pattern_match.group(1)
+        
+        try:
+            # قم بمحاولة تحديد المستخدم باستخدام اسم المستخدم أولاً
+            try:
+                user_entity = await sython1.get_entity(user_input)
+            except:
+                # إذا فشلت محاولة استخدام اسم المستخدم، قم بمحاولة استخدام الإيدي (معرف المستخدم)
+                user_id = int(user_input)
+                user_entity = await sython1.get_entity(InputUser(user_id, 0))
+            
+            await sython1(UnblockRequest(user_entity))  # قم بعملية إلغاء الحظر
+            await event.respond(f"**تم إلغاء حظر المستخدم {user_entity.first_name}**")
+        except Exception as e:
+            await event.respond(f"**خطأ في عملية إلغاء الحظر: {str(e)}**")
 
 
     
