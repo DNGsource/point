@@ -177,13 +177,13 @@ async def OwnerStart(event):
 
 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
 
-3 - لعمل حظر لمستخدم او بوت معين عبر اليوزر : 
+4 - لعمل حظر لمستخدم او بوت معين عبر اليوزر : 
 
 `/unblock + يوزر البوت او حساب المستخدم`
 
 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
 
-4 - لجعل الحساب ينقر على زر شفاف في بوت : 
+5 - لجعل الحساب ينقر على زر شفاف في بوت : 
 
 `/button + رقم الزر الشفاف + يوزر البوت`
 
@@ -191,7 +191,7 @@ note :  قم بحساب رقم الزر الشفاف من العدد 0
 
 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
 
-5 - لجعل الحساب ينضم الى قناة او مجموعة
+6 - لجعل الحساب ينضم الى قناة او مجموعة
 
 `/jn + يوزر القناة او المجموعة `
 
@@ -698,13 +698,9 @@ async def OwnerStart(event):
                     await sython1(ImportChatInviteRequest(bott))
                 msg2 = await sython1.get_messages(pot, limit=1)
                 await msg2[0].click(text='تحقق')
-                chs += 1
-                await event.edit(f"تم الانضمام في {chs} قناة")
             except:
                 msg2 = await sython1.get_messages(pot, limit=1)
                 await msg2[0].click(text='التالي')
-                chs += 1
-                await event.edit(f"القناة رقم {chs}")
 
         await sython1.send_message(event.chat_id, "تم الانتهاء من التجميع | SY")
         
