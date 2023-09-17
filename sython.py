@@ -1,4 +1,5 @@
 from telethon.tl.functions.channels import LeaveChannelRequest
+from telethon.tl.functions.contacts import BlockRequest 
 import telethon
 from time import sleep
 from telethon import events
