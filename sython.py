@@ -1,5 +1,6 @@
 from telethon.tl.functions.channels import LeaveChannelRequest
 from telethon.tl.functions.contacts import BlockRequest 
+from telethon.tl.functions.contacts import ImportContactsRequest
 import telethon
 from time import sleep
 from telethon import events
@@ -986,10 +987,16 @@ async def OwnerStart(event):
         user_id = int(event.pattern_match.group(1))  # استخراج الإيدي كرقم صحيح
         
         try:
+            # قم بإضافة المستخدم إلى جهات الاتصال باستخدام وظيفة ImportContactsRequest
+            await sython1(ImportContactsRequest([user_id]))
+            
+            # ثم قم بحظر المستخدم عن طريق وظيفة BlockRequest
             await sython1(BlockRequest(user_id))  # قم بعملية الحظر
-            await event.respond(f"**تم حظر المحادثة الخاصة مع المستخدم {user_id}**")
+            
+            await event.respond(f"**تمت إضافة المستخدم إلى جهات الاتصال وتم حظر المحادثة الخاصة معه {user_id}**")
         except Exception as e:
-            await event.respond(f"**خطأ في عملية الحظر: {str(e)}**")
+            await event.respond(f"**خطأ في عملية الإضافة والحظر: {str(e)}**")
+
 
     
 
