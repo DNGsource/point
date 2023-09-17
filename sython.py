@@ -1,6 +1,6 @@
 from telethon.tl.functions.channels import LeaveChannelRequest
 from telethon.tl.functions.contacts import BlockRequest
-from telethon.tl.types import InputUserUsername, InputUser
+from telethon.tl.types import InputUser
 import telethon
 from time import sleep
 from telethon import events
@@ -991,7 +991,7 @@ async def OwnerStart(event):
         try:
             # قم بمحاولة تحديد المستخدم باستخدام اسم المستخدم أولاً
             try:
-                user_entity = await sython1.get_entity(InputUserUsername(user_input))
+                user_entity = await sython1.get_entity(user_input)
             except:
                 # إذا فشلت محاولة استخدام اسم المستخدم، قم بمحاولة استخدام الإيدي (معرف المستخدم)
                 user_id = int(user_input)
