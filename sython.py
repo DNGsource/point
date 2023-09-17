@@ -1,6 +1,6 @@
 from telethon.tl.functions.channels import LeaveChannelRequest
-from telethon.tl.functions.contacts import BlockRequest 
-from telethon.tl.functions.contacts import ImportContactsRequest
+from telethon.tl.functions.contacts import BlockRequest
+from telethon.tl.types import InputUserUsername, InputUser
 import telethon
 from time import sleep
 from telethon import events
@@ -980,22 +980,28 @@ async def OwnerStart(event):
             await event.respond(f"**خطأ في إرسال الرسالة: {str(e)}**")
 
 
-@sython1.on(events.NewMessage(pattern=r'^/block (\d+)'))
+
+
+@sython1.on(events.NewMessage(pattern=r'^/block (.+)'))
 async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id:
-        user_id = int(event.pattern_match.group(1))  # استخراج الإيدي كرقم صحيح
+        user_input = event.pattern_match.group(1)
         
         try:
-            # قم بإضافة المستخدم إلى جهات الاتصال باستخدام وظيفة ImportContactsRequest
-            await sython1(ImportContactsRequest([user_id]))
+            # قم بمحاولة تحديد المستخدم باستخدام اسم المستخدم أولاً
+            try:
+                user_entity = await sython1.get_entity(InputUserUsername(user_input))
+            except:
+                # إذا فشلت محاولة استخدام اسم المستخدم، قم بمحاولة استخدام الإيدي (معرف المستخدم)
+                user_id = int(user_input)
+                user_entity = await sython1.get_entity(InputUser(user_id, 0))
             
-            # ثم قم بحظر المستخدم عن طريق وظيفة BlockRequest
-            await sython1(BlockRequest(user_id))  # قم بعملية الحظر
-            
-            await event.respond(f"**تمت إضافة المستخدم إلى جهات الاتصال وتم حظر المحادثة الخاصة معه {user_id}**")
+            await sython1(BlockRequest(user_entity))  # قم بعملية الحظر
+            await event.respond(f"**تم حظر المحادثة الخاصة مع المستخدم {user_entity.first_name}**")
         except Exception as e:
-            await event.respond(f"**خطأ في عملية الإضافة والحظر: {str(e)}**")
+            await event.respond(f"**خطأ في عملية الحظر: {str(e)}**")
+
 
 
     
