@@ -100,6 +100,8 @@ async def OwnerStart(event):
 
 𝟑 - للدخول الى اوامر مـمـيـزة : .مميزة
 
+𝟑 - للدخول الى اوامر الهدايا اليومية : .هدية
+
 𝟒 - لـفـحص عـمـل الـســورس : .فحص
 
 ============= • 𝐒𝐘 • ============
@@ -228,6 +230,33 @@ note : موقع الرسالة يعني مثلا اذا كان الاسم في �
 
 ============= • 𝐒𝐘 • ============
 **""")
+
+@sython1.on(events.NewMessage(outgoing=False, pattern='.هدية'))
+async def OwnerStart(event):
+    sender = await event.get_sender()
+    if sender.id == ownerhson_id :
+        order = await event.reply("""**
+⚝ قائمة اوامر الهدايا اليومية  
+============= • 𝐒𝐘 • ============
+
+`/reward1` :  تجميع هدية بوت المليار
+`/reward2` : تجميع هدية بوت الجوكر 
+`/reward3` :  تجميع هدية بوت العقاب 
+`/reward4` :   تجميع هدية بوت العرب 
+
+============= • 𝐒𝐘 • ============
+**""")
+
+@sython1.on(events.NewMessage(outgoing=False, pattern=r'^/reward1'))
+async def OwnerStart(event):
+    sender = await event.get_sender()
+    if sender.id == ownerhson_id :
+     send = await sython1.send_message(bot_username, '/start')
+     sleep(2)
+    msg1 = await sython1.get_messages(bot_username, limit=1)
+    await msg1[0].click(6)
+    await msgs[0].forward_to(ownerhson_id)
+
 
 @sython1.on(events.NewMessage(outgoing=False, pattern='/notes'))
 async def OwnerStart(event):
