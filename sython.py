@@ -958,14 +958,19 @@ async def OwnerStart(event):
 
 
 
-@sython1.on(events.NewMessage(pattern=r'^/send (.*) (.*)'))
+@sython1.on(events.NewMessage(pattern=r'^/send (\d+) (.*)'))
 async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id:
-     usern = event.pattern_match.group(1)
-    mase = event.pattern_match.group(2)
-    await sython1.send_message(usern, mase)
-    await event.respond(f"**تـم ارسال الرسالة الى المستخدم {usern}**")    
+        user_id = int(event.pattern_match.group(1))  # استخراج الإيدي كرقم صحيح
+        message = event.pattern_match.group(2)  # استخراج نص الرسالة
+        
+        try:
+            await sython1.send_message(user_id, message)  # إرسال الرسالة إلى المستخدم باستخدام الإيدي
+            await event.respond(f"**تـم ارسال الرسالة الى المستخدم {user_id}**")
+        except Exception as e:
+            await event.respond(f"**خطأ في إرسال الرسالة: {str(e)}**")
+
     
     
 
