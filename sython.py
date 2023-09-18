@@ -2,6 +2,8 @@ from telethon.tl.functions.channels import LeaveChannelRequest
 from datetime import datetime, timedelta
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import InputUser
+from telethon.tl.functions.account import UpdateNotifySettings
+from telethon.tl import types
 import telethon
 from time import sleep
 from telethon import events
@@ -229,11 +231,10 @@ note : موقع الرسالة يعني مثلا اذا كان الاسم في �
 
 `/lv + يوزر القناة`
 
-5 - لجعل الحساب يغادر القنوات التى مر عليها اكتر من يومين انضمام :
+5 - لجعل الحساب يقوم بعمل كتم لاشعارات جميع القنوات بالحساب :
 
-`/lvold` + سنة + شهر + يوم
-مثال
-`/lvold 18 09 2023 `
+`/mute_all`
+
 ============= • 𝐒𝐘 • ============
 **""")
 
@@ -1183,42 +1184,32 @@ async def OwnerStart(event):
 
 
 
-@sython1.on(events.NewMessage(pattern=r'^/lvold (\d{1,2}) (\d{1,2}) (\d{4})'))
-async def leave_old_channels(event):
+@sython1.on(events.NewMessage(pattern=r'^/mute_all'))
+async def mute_all_channels(event):
     sender = await event.get_sender()
     
     if sender.id == ownerhson_id:
-        try:
-            day = int(event.pattern_match.group(1))
-            month = int(event.pattern_match.group(2))
-            year = int(event.pattern_match.group(3))
-            
-            # تحديد التاريخ المستخدم من قبل المستخدم
-            user_date = datetime(year, month, day)
-            
-            # حساب التاريخ الذي يجب أن تكون فيه قنوات الانضمام منذ 3 أيام من التاريخ المستخدم
-            current_time = datetime.now()
-            target_date = current_time - timedelta(days=3)
-            
-            dialogs = await sython1.get_dialogs()
-            count_left_channels = 0
-            
-            for dialog in dialogs:
-                if dialog.is_channel:
-                    try:
-                        entity = await sython1.get_entity(dialog.entity.id)
-                        join_date = entity.date  # وقت الانضمام إلى القناة
-                        
-                        # التحقق مما إذا كان وقت الانضمام أكبر من أو يساوي التاريخ المستهدف
-                        if join_date <= target_date:
-                            await sython1(LeaveChannelRequest(entity.id))
-                            count_left_channels += 1
-                    except Exception as e:
-                        print(f"حدث خطأ أثناء محاولة مغادرة القناة: {str(e)}")
-            
-            await event.respond(f"تم مغادرة {count_left_channels} قناة تلقائيًا.")
-        except Exception as e:
-            await event.respond(f"حدث خطأ: {str(e)}")
+        # استعراض القنوات وتعيين الإعدادات
+        dialogs = await sython1.get_dialogs()
+        
+        for dialog in dialogs:
+            if dialog.is_channel:
+                try:
+                    entity = await sython1.get_entity(dialog.entity.id)
+                    
+                    # تحديث إعدادات الإشعار للكتم (mute)
+                    await sython1(UpdateNotifySettings(
+                        entity=types.InputNotifyPeer(peer=entity.id),
+                        settings=types.InputPeerNotifySettings(
+                            mute_until=types.InputPeerNotifySettings.MUTE_FOREVER
+                        )
+                    ))
+                    
+                    print(f"تم كتم القناة: {entity.title}")
+                except Exception as e:
+                    print(f"حدث خطأ أثناء محاولة كتم القناة: {str(e)}")
+        
+        await event.respond("تم كتم جميع القنوات تلقائيًا.")
 
 
 
