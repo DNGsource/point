@@ -1180,14 +1180,12 @@ async def OwnerStart(event):
         sendy = await sython1.send_message(event.chat_id,f"**تم مغادرة القناة @{usercht}**")
 
 
-# تخزين وقت الانضمام الحالي باسم آخر مثل "current_time_now"
-current_time_now = datetime.now()
-
 @sython1.on(events.NewMessage(pattern=r'^/lvold'))
 async def leave_old_channels(event):
     sender = await event.get_sender()
     
     if sender.id == ownerhson_id:
+        current_time = datetime.now()  # التاريخ والوقت الحالي
         dialogs = await sython1.get_dialogs()
         count_left_channels = 0
         
@@ -1196,7 +1194,7 @@ async def leave_old_channels(event):
                 try:
                     entity = await sython1.get_entity(dialog.entity.id)
                     join_date = entity.date  # وقت الانضمام إلى القناة
-                    difference = current_time_now - join_date
+                    difference = current_time - join_date
                     
                     if difference.days >= 2:  # إذا كان وقت الانضمام أكبر من 48 ساعة
                         await sython1(LeaveChannelRequest(entity.id))
@@ -1204,7 +1202,7 @@ async def leave_old_channels(event):
                 except Exception as e:
                     print(f"حدث خطأ أثناء محاولة مغادرة القناة: {str(e)}")
         
-        await event.respond(f"تم مغادرة {count_left_channels} قناة تلقائيًا.")
+        await event.respond(f"تم مغادرة {count_left_channels} قناة تلقائيًا في {current_time}.")
 
 
 @sython1.on(events.NewMessage(outgoing=False, pattern='^/voice (.*) (.*)'))
