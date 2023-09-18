@@ -1197,7 +1197,8 @@ async def leave_old_channels(event):
             user_date = datetime(year, month, day)
             
             # حساب التاريخ الذي يجب أن تكون فيه قنوات الانضمام منذ 3 أيام من التاريخ المستخدم
-            target_date = user_date - timedelta(days=3)
+            current_time = datetime.now()
+            target_date = current_time - timedelta(days=3)
             
             dialogs = await sython1.get_dialogs()
             count_left_channels = 0
