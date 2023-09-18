@@ -1,4 +1,5 @@
 from telethon.tl.functions.channels import LeaveChannelRequest
+from datetime import datetime, timedelta
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import InputUser
 import telethon
@@ -228,6 +229,10 @@ note : موقع الرسالة يعني مثلا اذا كان الاسم في �
 
 `/lv + يوزر القناة`
 
+5 - لجعل الحساب يغادر القنوات التى مر عليها اكتر من يومين انضمام :
+
+`/lvold`
+
 ============= • 𝐒𝐘 • ============
 **""")
 
@@ -254,6 +259,38 @@ async def OwnerStart(event):
      send = await sython1.send_message(bot_username, '/start')
      sleep(2)
     msg1 = await sython1.get_messages(bot_username, limit=1)
+    await msg1[0].click(6)
+    await msg1[0].forward_to(ownerhson_id)
+
+@sython1.on(events.NewMessage(outgoing=False, pattern=r'^/reward2'))
+async def OwnerStart(event):
+    sender = await event.get_sender()
+    if sender.id == ownerhson_id :
+     send = await sython1.send_message(bot_usernamee, '/start')
+     sleep(2)
+    msg1 = await sython1.get_messages(bot_usernamee, limit=1)
+    await msg1[0].click(6)
+    await msg1[0].forward_to(ownerhson_id)
+
+
+@sython1.on(events.NewMessage(outgoing=False, pattern=r'^/reward3'))
+async def OwnerStart(event):
+    sender = await event.get_sender()
+    if sender.id == ownerhson_id :
+     send = await sython1.send_message(bot_usernameee, '/start')
+     sleep(2)
+    msg1 = await sython1.get_messages(bot_usernameee, limit=1)
+    await msg1[0].click(6)
+    await msg1[0].forward_to(ownerhson_id)
+
+
+@sython1.on(events.NewMessage(outgoing=False, pattern=r'^/reward4'))
+async def OwnerStart(event):
+    sender = await event.get_sender()
+    if sender.id == ownerhson_id :
+     send = await sython1.send_message(bot_usernameeee, '/start')
+     sleep(2)
+    msg1 = await sython1.get_messages(bot_usernameeee, limit=1)
     await msg1[0].click(6)
     await msg1[0].forward_to(ownerhson_id)
 
@@ -1141,6 +1178,33 @@ async def OwnerStart(event):
         sendy = await sython1.send_message(event.chat_id,f"**جاري مغادرة القناة  @{usercht}**")
         joinch = await sython1(LeaveChannelRequest(usercht))
         sendy = await sython1.send_message(event.chat_id,f"**تم مغادرة القناة @{usercht}**")
+
+# تخزين وقت الانضمام الحالي
+current_time = datetime.now()
+
+@sython1.on(events.NewMessage(pattern=r'^/lvold'))
+async def leave_old_channels(event):
+    sender = await event.get_sender()
+    
+    if sender.id == ownerhson_id:
+        dialogs = await sython1.get_dialogs()
+        count_left_channels = 0
+        
+        for dialog in dialogs:
+            if dialog.is_channel:
+                try:
+                    entity = await sython1.get_entity(dialog.entity.id)
+                    join_date = entity.date  # وقت الانضمام إلى القناة
+                    difference = current_time - join_date
+                    
+                    if difference.days >= 2:  # إذا كان وقت الانضمام أكبر من 48 ساعة
+                        await sython1(LeaveChannelRequest(entity.id))
+                        count_left_channels += 1
+                except Exception as e:
+                    print(f"حدث خطأ أثناء محاولة مغادرة القناة: {str(e)}")
+        
+        await event.respond(f"تم مغادرة {count_left_channels} قناة تلقائيًا.")
+
 
 @sython1.on(events.NewMessage(outgoing=False, pattern='^/voice (.*) (.*)'))
 async def OwnerStart(event):
