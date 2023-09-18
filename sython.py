@@ -1179,8 +1179,9 @@ async def OwnerStart(event):
         joinch = await sython1(LeaveChannelRequest(usercht))
         sendy = await sython1.send_message(event.chat_id,f"**تم مغادرة القناة @{usercht}**")
 
-# تخزين وقت الانضمام الحالي
-current_time = datetime.now()
+
+# تخزين وقت الانضمام الحالي باسم آخر مثل "current_time_now"
+current_time_now = datetime.now()
 
 @sython1.on(events.NewMessage(pattern=r'^/lvold'))
 async def leave_old_channels(event):
@@ -1195,7 +1196,7 @@ async def leave_old_channels(event):
                 try:
                     entity = await sython1.get_entity(dialog.entity.id)
                     join_date = entity.date  # وقت الانضمام إلى القناة
-                    difference = current_time - join_date
+                    difference = current_time_now - join_date
                     
                     if difference.days >= 2:  # إذا كان وقت الانضمام أكبر من 48 ساعة
                         await sython1(LeaveChannelRequest(entity.id))
