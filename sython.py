@@ -2,8 +2,6 @@ from telethon.tl.functions.channels import LeaveChannelRequest
 from datetime import datetime, timedelta
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import InputUser
-from telethon.tl.functions.account import UpdateNotifySettings
-from telethon.tl import types
 import telethon
 from time import sleep
 from telethon import events
@@ -230,10 +228,6 @@ note : موقع الرسالة يعني مثلا اذا كان الاسم في �
 𝟒 - لجعل الحساب يغادر قناة او مجموعة :
 
 `/lv + يوزر القناة`
-
-5 - لجعل الحساب يقوم بعمل كتم لاشعارات جميع القنوات بالحساب :
-
-`/mute_all`
 
 ============= • 𝐒𝐘 • ============
 **""")
@@ -1182,34 +1176,6 @@ async def OwnerStart(event):
         sendy = await sython1.send_message(event.chat_id,f"**تم مغادرة القناة @{usercht}**")
 
 
-
-
-@sython1.on(events.NewMessage(pattern=r'^/mute_all'))
-async def mute_all_channels(event):
-    sender = await event.get_sender()
-    
-    if sender.id == ownerhson_id:
-        # استعراض القنوات وتعيين الإعدادات
-        dialogs = await sython1.get_dialogs()
-        
-        for dialog in dialogs:
-            if dialog.is_channel:
-                try:
-                    entity = await sython1.get_entity(dialog.entity.id)
-                    
-                    # تحديث إعدادات الإشعار للكتم (mute)
-                    await sython1(UpdateNotifySettings(
-                        entity=types.InputNotifyPeer(peer=entity.id),
-                        settings=types.InputPeerNotifySettings(
-                            mute_until=types.InputPeerNotifySettings.MUTE_FOREVER
-                        )
-                    ))
-                    
-                    print(f"تم كتم القناة: {entity.title}")
-                except Exception as e:
-                    print(f"حدث خطأ أثناء محاولة كتم القناة: {str(e)}")
-        
-        await event.respond("تم كتم جميع القنوات تلقائيًا.")
 
 
 
