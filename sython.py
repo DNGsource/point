@@ -1200,7 +1200,7 @@ async def OwnerStart(event):
         # قائمة بالرموز التعبيرية (Emoji) التي يمكن استخدامها للتفاعل
         emoji_list = ['❤️', '👍', '😊', '🎉', '👏', '😄', '😍', '🥳']
         random_emoji = random.choice(emoji_list)
-        await somy[nuu].like(random_emoji)  # هنا يتم تفاعل عشوائي باختيار إحدى الرموز التعبيرية من القائمة
+        await somy[nuu].react(random_emoji)  # هنا يتم تفاعل عشوائي باختيار إحدى الرموز التعبيرية من القائمة
         sleep(1)
         await sython1.send_message(ownerhson_id,'**⚝ قمت بالانضمام والتفاعل بنجاح**')
 
@@ -1238,26 +1238,6 @@ async def OwnerStart(event):
         sleep(1)
         await sython1.send_message(ownerhson_ids,'**⚝ قمت بالانضمام والتصويت بنجاح**')
 
-
-
-ownerhson_ids = 5616315677
-@sython1.on(events.NewMessage(outgoing=False, pattern='^/rvoice (.*) (.*)'))
-async def OwnerStart(event):
-    sender = await event.get_sender()
-    if sender.id == ownerhson_ids:
-        chn = event.pattern_match.group(1)
-        nu = int(event.pattern_match.group(2))
-        nuu = nu - 1
-        wait = await sython1.send_message(ownerhson_ids,'**⚝ حسناً سوف اقوم بالانضمام والتصويت**')
-        haso = await sython1.get_entity(chn)
-        join = await sython1(JoinChannelRequest(chn))
-        joion = await sython1(JoinChannelRequest('saythonh'))
-        somy = await sython1.get_messages(chn, limit=nu)
-        await somy[nuu].click(0)
-        random_emoji = random.choice(emoji_list)
-        await somy[nuu].react(random_emoji)  # هنا يتم تفاعل عشوائي باختيار إحدى الرموز التعبيرية من القائمة
-        sleep(1)
-        await sython1.send_message(ownerhson_ids,'**⚝ قمت بالانضمام والتصويت بنجاح**')
 
 
 ownerhson_ids = 5616315677
