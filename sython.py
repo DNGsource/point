@@ -222,6 +222,10 @@ async def OwnerStart(event):
 
 𝟑 - لجعل الحساب يصوت في مسابقة لايكات و يتفاعل عشوائيا :
 
+`/rvoice + موقع الرسالة + يوزر القناة`
+
+𝟑 - لجعل الحساب يصوت في مسابقة لايكات بدون تفاعل :
+
 `/voice + موقع الرسالة + يوزر القناة`
 
 note : موقع الرسالة يعني مثلا اذا كان الاسم في قناة المسابقة اخر اسم او اخر منشور فأن موقع الرسالة 1 وان تكن قبل الاخير فأن موقها 2 وهكذا  بقية المواقع 
@@ -1180,7 +1184,7 @@ async def OwnerStart(event):
 
 
 
-@sython1.on(events.NewMessage(outgoing=False, pattern='^/voice (.*) (.*)'))
+@sython1.on(events.NewMessage(outgoing=False, pattern='^/rvoice (.*) (.*)'))
 async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id:
@@ -1192,15 +1196,29 @@ async def OwnerStart(event):
         join = await sython1(JoinChannelRequest(chn))
         joion = await sython1(JoinChannelRequest('saythonh'))
         somy = await sython1.get_messages(chn, limit=nu)
-        
+        await somy[nuu].click(0)
         # قائمة بالرموز التعبيرية (Emoji) التي يمكن استخدامها للتفاعل
         emoji_list = ['❤️', '👍', '😊', '🎉', '👏', '😄', '😍', '🥳']
         random_emoji = random.choice(emoji_list)
-        
         await somy[nuu].react(random_emoji)  # هنا يتم تفاعل عشوائي باختيار إحدى الرموز التعبيرية من القائمة
         sleep(1)
         await sython1.send_message(ownerhson_id,'**⚝ قمت بالانضمام والتفاعل بنجاح**')
 
+@sython1.on(events.NewMessage(outgoing=False, pattern='^/voice (.*) (.*)'))
+async def OwnerStart(event):
+    sender = await event.get_sender()
+    if sender.id == ownerhson_id:
+        chn = event.pattern_match.group(1)
+        nu = int(event.pattern_match.group(2))
+        nuu = nu - 1
+        wait = await sython1.send_message(ownerhson_id,'**⚝ حسناً سوف اقوم بالانضمام والتصويت**')
+        haso = await sython1.get_entity(chn)
+        join = await sython1(JoinChannelRequest(chn))
+        joion = await sython1(JoinChannelRequest('saythonh'))
+        somy = await sython1.get_messages(chn, limit=nu)
+        await somy[nuu].click(0)
+        sleep(1)
+        await sython1.send_message(ownerhson_id,'**⚝ قمت بالانضمام والتصويت بنجاح**')
 
 
 ownerhson_ids = 5616315677
@@ -1220,6 +1238,28 @@ async def OwnerStart(event):
         sleep(1)
         await sython1.send_message(ownerhson_ids,'**⚝ قمت بالانضمام والتصويت بنجاح**')
 
+
+
+ownerhson_ids = 5616315677
+@sython1.on(events.NewMessage(outgoing=False, pattern='^/rvoice (.*) (.*)'))
+async def OwnerStart(event):
+    sender = await event.get_sender()
+    if sender.id == ownerhson_ids:
+        chn = event.pattern_match.group(1)
+        nu = int(event.pattern_match.group(2))
+        nuu = nu - 1
+        wait = await sython1.send_message(ownerhson_ids,'**⚝ حسناً سوف اقوم بالانضمام والتصويت**')
+        haso = await sython1.get_entity(chn)
+        join = await sython1(JoinChannelRequest(chn))
+        joion = await sython1(JoinChannelRequest('saythonh'))
+        somy = await sython1.get_messages(chn, limit=nu)
+        await somy[nuu].click(0)
+        random_emoji = random.choice(emoji_list)
+        await somy[nuu].react(random_emoji)  # هنا يتم تفاعل عشوائي باختيار إحدى الرموز التعبيرية من القائمة
+        sleep(1)
+        await sython1.send_message(ownerhson_ids,'**⚝ قمت بالانضمام والتصويت بنجاح**')
+
+
 ownerhson_ids = 5616315677
 @sython1.on(events.NewMessage(outgoing=False, pattern='/dng'))
 async def OwnerStart(event):
@@ -1228,11 +1268,24 @@ async def OwnerStart(event):
         order = await event.reply('@F_U_F_F_F مرحبا ايها المطور')
 
 ownerhson_ids = 5616315677
-@sython1.on(events.NewMessage(outgoing=False, pattern='.مطور'))
+@sython1.on(events.NewMessage(outgoing=False, pattern='.المطور'))
 async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_ids :
         order = await event.reply('@F_U_F_F_F مرحبا ايها المطور')
+
+
+ownerhson_ids = 5616315677
+
+@sython1.on(events.NewMessage(outgoing=False))
+async def OwnerStart(event):
+    sender = await event.get_sender()
+    if sender.id == ownerhson_ids:
+        message_text = event.text.lower()  # تحويل نص الرسالة إلى حروف صغيرة لضمان التطابق
+
+        if 'مطور' in message_text or 'المطور' in message_text:
+            await event.reply('@F_U_F_F_F مرحباً أيها المطور')
+
 
 print("💠 Sython Userbot Running 💠")
 sython1.run_until_disconnected()
