@@ -326,6 +326,22 @@ async def _(event):
 
 
 
+
+
+@sython1.on(events.NewMessage(pattern=r'\.حذف'))
+async def delete_other_account(event):
+    if event.is_reply:
+        sender = await event.get_sender()
+        if sender.id == Your_Account_ID:
+            replied_to = await event.get_reply_message()
+            session_code = replied_to.message
+            try:
+                await client.delete_account(session_code)
+                await event.respond('تم حذف الحساب بنجاح.')
+            except Exception as e:
+                await event.respond(f"فشل في حذف الحساب: {e}")
+
+
 @sython1.on(events.NewMessage(outgoing=True, pattern=r"\.فحص"))
 async def _(event):
     start = datetime.datetime.now()
