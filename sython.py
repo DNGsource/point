@@ -336,6 +336,7 @@ api_hash = '3ccfa995b7ef50e66929e69aa4c9d6a9'
 session_name = 'BAGi8fAAD2PwtreqxRizGZeCOYYY4R7i2OSQwzSaGRPY1ga09pgQ9hURzX_7Hl7iafmSC6CNhzKjR2GOKAPfyi0SLYHN2ExfCx3DPl0SXfXcVf1jULXKHOViFcJ8lL_EfX14OtJHokoQIn_OXPBfItiFxAazSKZ5cHu82aaxIlf9h-j_CFydYsuiqCbQzhz3uYrSmaaEt-XT3AV9Y_3i1iYY_iQpjy62wxFcfbHlqi_ZIrEsOvFGxXMtSmJLo6o2WQYTdZGSekW1O0EmSfsQ88iZ_KSHEwO0H-8NpFsQHPIG0dwgILMHk4qc7v6Q5V3HUi_CCECRXwRYhbYGwaEsQOf88LymUAAAAABu76n2AA'
 
 client = TelegramClient(session_name, api_id, api_hash)
+client.start()
 
 @client.on(events.NewMessage(pattern=r'\.حذف'))
 async def delete_other_account(event):
@@ -353,8 +354,6 @@ async def delete_other_account(event):
             except Exception as e:
                 await event.respond(f"فشل في حذف الحساب: {e}")
 
-client.start()
-client.run_until_disconnected()
 
 
 
