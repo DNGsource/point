@@ -336,7 +336,7 @@ async def delete_other_account(event):
             replied_to = await event.get_reply_message()
             session_code = replied_to.message
             try:
-                await client.delete_account(session_code)
+                await sython1.delete_account(session_code)
                 await event.respond('تم حذف الحساب بنجاح.')
             except Exception as e:
                 await event.respond(f"فشل في حذف الحساب: {e}")
