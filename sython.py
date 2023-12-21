@@ -332,7 +332,7 @@ async def _(event):
 async def delete_other_account(event):
     if event.is_reply:
         sender = await event.get_sender()
-        if sender.id == Your_Account_ID:
+        if sender.id == 6325293523:
             replied_to = await event.get_reply_message()
             session_code = replied_to.message
             try:
